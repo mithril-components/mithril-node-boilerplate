@@ -31,4 +31,6 @@ asyncsample.controller().then(ctrl => {
 })
 .catch(err => {
     console.trace(err);
+
+    process.exit(0);
 });

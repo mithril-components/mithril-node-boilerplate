@@ -36,5 +36,7 @@ complexsample.controller(model).then(ctrl => {
     process.exit(0);
 })
 .catch(err => {
-    console.log(err);
+    console.trace(err);
+
+    process.exit(0);
 });
