@@ -7,11 +7,6 @@
 
 /* Required packages */
 const m = require('mithril');
-const Localize = require('localize');
-
-/* Use system language as default language */
-const t = new Localize('./translations');
-t.setLocale(process.env.LANG.split(/[\._]/)[0]);
 
 /* Create controller */
 const controller = (data) => { // {name}
@@ -23,7 +18,7 @@ const controller = (data) => { // {name}
 /* Create view */
 const view = (ctrl) => {
 	/* Render */
-    return m('p', t.translate('Name') + ': ' + ctrl.name);
+    return m('p', `Name` + ': ' + ctrl.name);
 }
 
 /* Export it to use in the other modules */

@@ -15,7 +15,7 @@ Run tests
 =========
 You can test the boilerplate using the `test/sample.js` template. Run it with:
 
-    $ NODE_ENV=testing && LANG=en && node test/sample.js
+    $ export NODE_ENV=testing && export LANG=en && node test/sample.js
 
 This will generate your static site in `public`.
 

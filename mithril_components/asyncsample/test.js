@@ -8,13 +8,13 @@ const render  = require('mithril-node-render')
 const express = require('express');
 
 /* The module itself */
-const asyncsample   = require('../mithril_components/asyncsample');
+const asyncsample   = require('./asyncsample');
 
 /* Mocking HTTP API and run the server */
 const model = {city: 'Beijing', country: 'China'};
 const app  = express();
 app.get('/some/url', (req, res) => res.status(200).json(model));
-app.listen(7000, () => console.log('Test is running...'));
+app.listen(7000);
 
 /* Create the controller */
 asyncsample.controller().then(ctrl => {
@@ -27,9 +27,8 @@ asyncsample.controller().then(ctrl => {
     /* Print rendered HTML to console */
     console.log(innerHtml);
 
-    /* Generate static page */
-    const base = fs.readFileSync('public/template.html', 'UTF-8');
-	fs.writeFileSync('public/index.html', base.replace('%CONTENT%', innerHtml), 'UTF-8');
-
     process.exit(0);
+})
+.catch(err => {
+    console.trace(err);
 });

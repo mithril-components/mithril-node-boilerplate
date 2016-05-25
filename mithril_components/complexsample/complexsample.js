@@ -2,16 +2,11 @@
 
 /* Required packages */
 const m = require('mithril');
-const Localize = require('localize');
 
 /* Required local files */
-const sample = require('./sample');
-const asyncsample = require('./asyncsample');
+const sample = require('../sample/sample');
+const asyncsample = require('../asyncsample/asyncsample');
 
-
-/* Use system language as default language */
-const t = new Localize('./translations');
-t.setLocale(process.env.LANG.split(/[\._]/)[0]);
 
 /**
 * Create controller.
