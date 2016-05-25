@@ -7,8 +7,6 @@ const fs     = require('fs');
 const render  = require('mithril-node-render')
 const express = require('express');
 
-const config = require('../config');
-
 /* The module itself */
 const asyncsample   = require('../mithril_components/asyncsample');
 
@@ -16,7 +14,7 @@ const asyncsample   = require('../mithril_components/asyncsample');
 const model = {city: 'Beijing', country: 'China'};
 const app  = express();
 app.get('/some/url', (req, res) => res.status(200).json(model));
-app.listen(config.test_server_port, () => console.log('Test is running...'));
+app.listen(7000, () => console.log('Test is running...'));
 
 /* Create the controller */
 asyncsample.controller().then(ctrl => {

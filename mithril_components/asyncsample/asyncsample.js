@@ -5,8 +5,6 @@ const m = require('mithril');
 const Localize = require('localize');
 const request  = require('request');
 
-const config = require('../config');
-
 /* Use system language as default language */
 const t = new Localize('./translations');
 t.setLocale(process.env.LANG.split(/[\._]/)[0]);
@@ -23,7 +21,7 @@ const sample = () => {   // {city, country}
 
     /* Configure the request */
     const options = {
-        url: `${config.rest_server}/some/url`,
+        url: process.env.NODE_ENV == 'testing' ? 'http://localhost:7000/some/url' : 'http://real.server/some/url',
         headers: headers,
         method: 'GET'
     };

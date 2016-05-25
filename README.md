@@ -11,19 +11,11 @@ You need to setup NodeJS 5.6.0+, then:
     npm install
     cd public && bower install
 
-Setup config
-============
-
-Copy `config-sample.js` to `config.js`.
-
-    cp config-sample.js config.js 
-
-
 Run tests
 =========
 You can test the boilerplate using the `test/sample.js` template. Run it with:
 
-    export LANG=en && node test/sample.js
+    $ NODE_ENV=testing && LANG=en && node test/sample.js
 
 This will generate your static site in `public`.
 
