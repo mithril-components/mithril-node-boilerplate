@@ -2,14 +2,7 @@
 
 /* Required packages */
 const m = require('mithril');
-const Localize = require('localize');
 const request  = require('request');
-
-const config = require('../config');
-
-/* Use system language as default language */
-const t = new Localize('./translations');
-t.setLocale(process.env.LANG.split(/[\._]/)[0]);
 
 /* Load the model data with REST */
 /* Create JSON from request */
@@ -23,7 +16,8 @@ const sample = () => {   // {city, country}
 
     /* Configure the request */
     const options = {
-        url: `${config.rest_server}/some/url`,
+        /* We use the mock server for test */
+        url: process.env.NODE_ENV == 'testing' ? 'http://localhost:7000/some/url' : 'http://real.server/some/url',
         headers: headers,
         method: 'GET'
     };
@@ -59,8 +53,8 @@ const controller = () => { // {name}
 const view = (ctrl) => {
     return [
         /* Render */
-    	m('p', t.translate('City') + ': ' + ctrl.city),
-    	m('p', t.translate('Country') + ': ' + ctrl.country)
+    	m('p', `City` + ': ' + ctrl.city),
+    	m('p', `Country` + ': ' + ctrl.country)
     ];
 }
 

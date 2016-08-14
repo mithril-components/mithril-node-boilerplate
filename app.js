@@ -18,7 +18,9 @@ router.get('/sample/:name', (req, res, next) => {
     res.type('html').send(html);
 });
 
+/* You can not run this method when you don't have actual rest server to feed data */
 router.get('/asyncsample', (req, res, next) => {
+    console.log('here');
     render.asyncsample().then(html => {
         res.type('html').send(html);
     })
