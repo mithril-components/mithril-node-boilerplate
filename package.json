@@ -2,9 +2,9 @@
   "name": "mithril_boilerplate",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.13.3",
+    "express": "4.14.0",
     "mithril": "0.2.4",
     "mithril-node-render": "0.5.0",
-    "request": "*"
+    "request": "2.74.0"
   }
 }
