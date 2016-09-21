@@ -1,15 +1,20 @@
 This project is a very simple boilerplate using NodeJS + Mithril to generate static pages for your REST API or static data.
 
-Install requirements
-====================
+Getting started
+===============
 
-You need to setup NodeJS 5.6.0+, then:
+You need to setup NodeJS 6.4.0+, then:
 
-    npm install -g browser-sync
-    npm install -g bower
-    npm install -g less
+    npm install babel-cli babel-preset-es2015
     npm install
-    cd public && bower install
+
+Install bower if you don't have it already:
+
+    sudo npm install -g bower
+    
+then:
+
+    cd public && bower install && cd -
 
 Run tests
 =========

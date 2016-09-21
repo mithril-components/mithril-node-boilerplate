@@ -1,33 +1,60 @@
 #!/usr/bin/env node
 'use strict'
 
-/** HTTP server using ExpressJS */
+import express from 'express';
+import generator from './lib/generator';
+import render from './lib/render';
+import {extend, isMobile} from './lib/util';
 
-/* Required stuffs */
-const express = require('express');
-const render  = require('./lib/render');
-
-/* Express Router to handle REST11 */
 const router = express.Router();
 
-/* sample page. We get required name parameter from URL */
-router.get('/sample/:name', (req, res, next) => {
-    const name = req.params.name; // part of the URL
+const pages = {
+    '/component1': {
+        components: [
+            {name: 'component1'}
+        ]
+    },
+    '/component2': {
+            components: [
+                {name: 'component2'}
+            ]
+        },
+    '/component1and2': {
+        components: [
+            {name: 'component1'},
+            {name: 'component2'}
+        ]
+    },
+    '/component3/:dynamic': {
+        components: [
+            {name: 'component3', params: {static: 'value'}}
+        ]
+    }
+}
 
-    const html = render.sample(name);
-    res.type('html').send(html);
-});
-
-/* You can not run this method when you don't have actual rest server to feed data */
-router.get('/asyncsample', (req, res, next) => {
-    console.log('here');
-    render.asyncsample().then(html => {
-        res.type('html').send(html);
-    })
-    .catch(err => {
-        res.status(500).json(err);
-    })
-});
+// add pages
+for (let p in pages) {
+    router.get(p, (req, res, next) => {
+        const ua = req.get('User-Agent');
+        const params = extend(
+            {
+                contextPath: req.protocol + '://' + req.headers.host,
+                isWeixin: ua && ua.match(/micromessenger/i),
+                isMobile: isMobile(ua)
+            },
+            req.query,
+            req.params
+        );
+        const generated = generator(pages[p].components, params);
+        render(generated, params).then(html => {
+            return res.type('html').send(html);
+        })
+        .catch(err => {
+            console.trace(err);
+            res.status(500).json(err);
+        });
+    });
+}
 
 /* Start express */
 const app = express();
