@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.13.3",
-    "mithril": "^0.2.0",
-    "mithril-node-render": "^0.4.2"
+    "express":  "4.14.0",
+    "mithril": "0.2.4",,
+    "mithril-node-render": "0.5.0"
   },
   "scripts": {
     "start": "nodemon mithril_components/component1/test.js --exec babel-node --presets es2015"
