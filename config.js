@@ -1,5 +1,4 @@
 'use strict'
-
-module.exports = {
+export default {
     site_name: `Sample Mithril node`
 }
