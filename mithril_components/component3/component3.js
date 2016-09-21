@@ -26,10 +26,14 @@ const view = (ctrl) => {
     ];
 }
 
-const resources = (ctrl) => [
-    component1.resources(ctrl.component1Ctrl),
-    component2.resources(ctrl.component2Ctrl)
-]
+const resources = (ctrl) => []
+    .concat(ctrl.component1Ctrl)
+    .concat(ctrl.component2Ctrl)
+    .concat(
+        {
+            title: "Component3's page"
+        }
+    );
 
 export default {
     controller: controller,
