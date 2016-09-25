@@ -14,6 +14,8 @@ component.load = () => {
 }
 
 describe("component2", () => {
+    const params = {};
+
     it("test view", (done) => {
         component.controller().then(ctrl => {
             const view = component.view(ctrl);
@@ -22,6 +24,9 @@ describe("component2", () => {
             expect(html).to.equal("<ul><li>Item1</li><li>Item2</li></ul>");
 
             done();
+        })
+        .catch(err => {
+            console.log(err);
         });
     });
 });

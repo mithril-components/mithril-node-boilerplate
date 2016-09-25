@@ -21,4 +21,19 @@ export default class {
         }
     }
 
+    /* Minimum requirement */
+    /*
+    controller(params) {
+        return Promise.resolve({});
+    }
+
+    view(ctrl) {
+        return '';
+    }
+
+    resources() {
+        return [];
+    }
+    */
+
 }

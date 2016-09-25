@@ -10,13 +10,18 @@ const component = new Component1();
 
 describe("component1", () => {
     it("test view", (done) => {
-        component.controller().then(ctrl => {
+        const params = {};
+
+        component.controller(params).then(ctrl => {
             const view = component.view(ctrl);
             const html = render(view);
 
             expect(html).to.equal("<p>This is test</p>");
 
             done();
+        })
+        .catch(err => {
+            console.log(err);
         });
     });
 });
