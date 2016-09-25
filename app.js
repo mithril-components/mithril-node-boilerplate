@@ -32,14 +32,14 @@ const pages = {
     }
 }
 
-// add pages
+// components page handler
 for (let p in pages) {
     router.get(p, (req, res, next) => {
         const ua = req.get('User-Agent');
+        /** params generate **/
         const params = extend(
             {
                 contextPath: req.protocol + '://' + req.headers.host,
-                isWeixin: ua && ua.match(/micromessenger/i),
                 isMobile: isMobile(ua)
             },
             req.query,
@@ -66,4 +66,5 @@ app.use(express.static(__dirname + '/public'));
 
 // Default HTTP port is 9004
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listening on ${port} ...`));
+const host = process.env.HOST || '127.0.0.1';
+app.listen(port, host, () => console.log(`Listening on ${port} ...`));
