@@ -31,7 +31,7 @@ export default class {
         return '';
     }
 
-    resources() {
+    resources(ctrl) {
         return [];
     }
     */

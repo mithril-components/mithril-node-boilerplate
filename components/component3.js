@@ -26,8 +26,6 @@ export default class extends Component {
     }
 
     view(ctrl) {
-            console.log('ok4')
-
         return [
             this.component1.view(ctrl.component1Ctrl),
             this.component2.view(ctrl.component2Ctrl),
