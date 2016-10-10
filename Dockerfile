@@ -9,4 +9,4 @@ RUN cd public/ && bower install --allow-root && cd -
 WORKDIR publish
 
 EXPOSE 8080
-ENTRYPOINT ["node", "app.js"]
+ENTRYPOINT ["npm", "start"]
