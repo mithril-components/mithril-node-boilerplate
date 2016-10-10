@@ -1,12 +1,15 @@
-FROM node
+FROM node:6.7
 MAINTAINER Hamed Abdollahpour <ha.hamed@gmail.com>
 
-RUN npm install -g mithril-component-tools
-ADD ./ ./
-RUN mct publish publish/ en
+WORKDIR /opt
+
+ADD components components
+ADD lib lib
+ADD public public
+ADD .babelrc app.js config.js package.json ./
+RUN npm install
+RUN export PATH=$PATH:./node_modules/.bin
 RUN cd public/ && bower install --allow-root && cd -
 
-WORKDIR publish
-
-EXPOSE 8080
-ENTRYPOINT ["npm", "start"]
+#EXPOSE 8080
+#ENTRYPOINT ["npm", "start"]
