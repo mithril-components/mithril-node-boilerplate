@@ -6,6 +6,7 @@ import generator from './lib/generator';
 import render from './lib/render';
 import {extend, isMobile} from './lib/util';
 import pages from './lib/pages';
+import config from './config';
 
 const router = express.Router();
 
@@ -17,13 +18,14 @@ const pageHandler = (page) => {
       const params = extend(
           {
               contextPath: req.protocol + '://' + req.headers.host,
+              requestUrl: '//' + req.headers.host + config.context_path + req.url,
               isMobile: isMobile(ua)
           },
           req.query,
           req.params
       );
-      const generated = generator(page.components, params);
-      render(generated, params).then(html => {
+      const generated_components = generator(page.components, params);
+      render({components: generated_components, params: params, layout: page.layout}).then(html => {
           return res.type('html').send(html);
       })
       .catch(err => {
@@ -35,7 +37,7 @@ const pageHandler = (page) => {
 
 // add pages
 pages.forEach(page => {
-    [].concat(page.path).forEach(path => router.get(path, pageHandler(page)));
+    [].concat(page.path).forEach(path => router.get(config.context_path + path, pageHandler(page)));
 });
 
 /* Start express */

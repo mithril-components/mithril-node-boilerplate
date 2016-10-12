@@ -7,7 +7,7 @@ import chai from 'chai';
 const expect = chai.expect;
 
 describe("check utils", () => {
-    it.only("extend2Array", () => {
+    it("extend2Array", () => {
         const array = extend2Array(
             {item1: "test1"},
             {item1: "test2"},
