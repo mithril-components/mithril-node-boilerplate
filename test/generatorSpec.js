@@ -5,9 +5,9 @@ import chai from 'chai';
 
 const expect = chai.expect;
 
-describe("check components", () => {
+describe("generator", () => {
     it("list components", () => {
-        console.log(listComponents());
+        expect(Object.keys(listComponents())).to.eql(['404', 'component1', 'component2', 'component3']);
     });
     it("check component list", (done) => {
         const componentList = [
