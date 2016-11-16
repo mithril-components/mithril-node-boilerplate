@@ -22,7 +22,6 @@ export default class {
     }
 
     /* Minimum requirement */
-    /*
     controller(params) {
         return Promise.resolve({});
     }
@@ -34,6 +33,5 @@ export default class {
     resources(ctrl) {
         return [];
     }
-    */
 
 }

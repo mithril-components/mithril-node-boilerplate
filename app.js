@@ -18,7 +18,7 @@ const pageHandler = (page) => {
       const params = extend(
           {
               contextPath: req.protocol + '://' + req.headers.host,
-              requestUrl: '//' + req.headers.host + config.context_path + req.url,
+              requestPath: config.context_path + req.url,
               isMobile: isMobile(ua)
           },
           req.query,
@@ -26,27 +26,31 @@ const pageHandler = (page) => {
       );
       const generated_components = generator(page.components, params);
       render({components: generated_components, params: params, layout: page.layout}).then(html => {
-          return res.type('html').send(html);
+          res.type('html').send(html);
       })
       .catch(err => {
-          console.trace(err);
-          res.status(500).json(err);
+          console.error(err);
+          pageHandler({
+              components: [
+                  {name: '500', params: err}
+              ]
+          })(req, res, next);
       });
    };
 }
 
 // add pages
 pages.forEach(page => {
-    [].concat(page.path).forEach(path => router.get(config.context_path + path, pageHandler(page)));
+    [].concat(page.path).forEach(path => router.get(config.context_path + encodeURI(path), pageHandler(page)));
 });
 
 /* Start express */
 const app = express();
 
 /* Register route on root */
-app.use('/', router);
+app.use(config.context_path + '/', router);
 /* Static resources like, css, images */
-app.use(express.static(__dirname + '/public'));
+app.use(config.context_path + '/', express.static(__dirname + '/public'));
 
 // Handle 404
 app.use((req, res, next) => {
