@@ -41,7 +41,7 @@ const pageHandler = (page) => {
 
 // add pages
 pages.forEach(page => {
-    [].concat(page.path).forEach(path => router.get(config.context_path + encodeURI(path), pageHandler(page)));
+    [].concat(page.path).forEach(path => router.get(encodeURI(path), pageHandler(page)));
 });
 
 /* Start express */

@@ -23,7 +23,7 @@ export default class {
 
     /* Minimum requirement */
     controller(params) {
-        return Promise.resolve({});
+        return Promise.resolve(params ? params : {});
     }
 
     view(ctrl) {
